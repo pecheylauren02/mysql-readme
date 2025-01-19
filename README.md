@@ -115,13 +115,13 @@ Create and use the COMPANY1 database in MySQL:
 
 ### 2. Create the Tables and Insert Sample Data:
 
-- Run the scripts below to create the EMP and DEPT tables in the database and insert the sample data:
+Run the scripts below to create the EMP and DEPT tables in the database and insert the sample data:
 
 ![Creating Tables](docs/images/create_table.png)
 
 ![Insert Tables](docs/images/insert_table.png)
 
-Results:
+#### Results:
 
 ![Creating and Inserting tables](docs/images/create_and_insert_tables.png)
 
@@ -137,9 +137,12 @@ The database structure models a simple organizational hierarchy with departments
 
 ### 3. Verify Tables:
 
+- SELECT * FROM DEPT;
+- SELECT * FROM EMP;
+
 ![Verify Tables](docs/images/verify_tables.png)
 
-#### *Explanations:*
+#### *Explanation:*
 
 The `SELECT * FROM DEPT` and `SELECT * FROM EMP` queries retrieve all the data stored in the `DEPT` and `EMP` tables, respectively. The `DEPT` table contains details about departments, while the `EMP` table holds employee information. These queries return all rows and columns, providing a comprehensive view of the data in each table.
 
