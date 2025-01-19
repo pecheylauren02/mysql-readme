@@ -61,11 +61,45 @@ Below are the SQL queries that retrieve specific information from the database:
 - JOIN DEPT D ON E.DEPTNO = D.DEPTNO
 - WHERE SAL > 1000 AND SAL < 2000;
 
+![Employees' salaries between 1000 and 2000](docs/images/salary_1000-2000.png)
+
+#### *Explanation:*
+
+This query retrieves the names (`ENAME`), department names (`DNAME`), and salaries (`SAL`) of employees whose salary is greater than 1,000 but less than 2,000. The query performs the following steps:
+
+- **Salary Range Condition:** The `WHERE` clause filters the employees based on their salary, where `SAL > 1000 AND SAL < 2000`. This ensures that only employees with a salary within the specified range (greater than 1,000 but less than 2,000) are included in the result set.
+- **Join Condition:** The query uses a `JOIN` between the `EMP` table (which stores employee details) and the `DEPT` table (which contains department details). The `E.DEPTNO = D.DEPTNO` ensures that each employee's department is correctly identified by matching the `DEPTNO` (department number) field in both tables.
+
+#### *Analysis of Results:*
+
+- **Employee Names and Salaries:** The query successfully retrieves the names and salaries of employees whose salary falls within the specified range, filtering out employees who have salaries below 1,000 or above 2,000.
+- **Department Information:** The query also returns the department name (`DNAME`) for each employee, providing insight into which department the employee belongs to while meeting the salary criteria.
+- **Salary Range:** Only employees whose salary is strictly greater than 1,000 and less than 2,000 are included in the results, ensuring that only employees within the specified salary range are counted.
+
+
 ### 2. Count the number of people in department 30 who receive both a salary and a commission:
 
-- SELECT COUNT(*)
-- FROM EMP
-- WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
+SELECT COUNT(*)
+FROM EMP
+WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
+
+![Count Salaries Screenshot](docs/images/salary_count.png)
+
+#### *Explanation:*
+This query counts the number of employees in department 30 who have both a non-null salary (`SAL IS NOT NULL`) and a non-null commission (`COMM IS NOT NULL`). The query applies the following conditions:
+
+- **DEPTNO = 30:** Filters the employees who are assigned to department 30.
+- **SAL IS NOT NULL:** Ensures that only employees with a valid salary are considered in the count.
+- **COMM IS NOT NULL:** Ensures that only employees who receive a commission are included in the count.
+
+The query uses `COUNT(*)` to return the total number of employees who meet all these conditions.
+
+#### *Analysis of Results:*
+
+- **Department Filter:** The query successfully filters the employees who belong to department 30, ensuring that only employees from the correct department are counted.
+- **Salary Condition:** The `SAL IS NOT NULL` condition ensures that only employees with a valid salary are included, excluding those with missing salary data.
+- **Commission Condition:** The `COMM IS NOT NULL` condition ensures that only employees who receive a commission are included in the count, providing a filtered view of employees with both salary and commission.
+- **Result Count:** The final result gives the total number of employees in department 30 who meet all the specified conditions, which helps in understanding the distribution of compensation types within the department.
 
 ### 3. Find the name and salary of employees that have a salary greater or equal to 1,000 and live in Dallas:
 - SELECT ENAME, SAL
@@ -75,13 +109,13 @@ Below are the SQL queries that retrieve specific information from the database:
 
 ![Dallas Salaries Screenshot](docs/images/dallas_salaries.png)
 
-#### **Explanation**:
+#### *Explanation*:
 The purpose of this query is to retrieve the names (`ENAME`) and salaries (`SAL`) of employees whose salary is greater than or equal to 1,000 and who work in the department located in Dallas. The query joins the `EMP` and `DEPT` tables on the department number (`DEPTNO`) and applies the following filtering conditions:
 
 - **The salary condition:** `SAL >= 1000`
 - **The location condition:** `D.LOC = 'DALLAS'`
 
-#### **Analysis of Results**:
+#### *Analysis of Results*:
 
 - **Employee Names and Salaries:** The query successfully retrieves the names and salaries of employees based on the specified salary and location criteria.
 - **Department Location:** The query ensures that only employees working in departments located in Dallas are included in the results, by filtering for `D.LOC = 'DALLAS'`.
@@ -95,19 +129,23 @@ The purpose of this query is to retrieve the names (`ENAME`) and salaries (`SAL`
 
 ![Companies without current employees Screenshot](docs/images/unemployed_results.png)
 
-#### **Explanation**:
+#### *Explanation*:
 
 The query was intended to retrieve the names of departments that currently have no employees. It works by selecting all department names from the DEPT table where the department number (DEPTNO) does not appear in the list of department numbers from the EMP table.
 
-#### **Analysis of Results**:
+#### *Analysis of Results*:
 
 The query returned no results because every department in the DEPT table has at least one employee in the EMP table. In other words, all department numbers in the DEPT table were present in the EMP table, so the NOT IN condition did not find any matching rows.
 
-5. List the department number, average salary, and number/count of employees of each department:
+### 5. List the department number, average salary, and number/count of employees of each department:
+
+SELECT DEPTNO, AVG(SAL) AS AverageSalary, COUNT(*) AS NumberOfEmployees
+FROM EMP
+GROUP BY DEPTNO;
 
 ![Average Salary Screenshot](docs/images/average_salary.png)
 
-#### **Explanation:**
+#### *Explanation:*
 This query retrieves the department number (`DEPTNO`), the average salary (`AVG(SAL)`) for employees in each department, and the total number of employees (`COUNT(*)`) in each department. The query uses the `GROUP BY` clause to group the data by department number (`DEPTNO`), calculating the aggregate functions `AVG()` for the average salary and `COUNT()` for the number of employees per department.
 
 The query is structured as follows:
@@ -117,7 +155,7 @@ The query is structured as follows:
 - **COUNT(*):** Counts the total number of employees in each department.
 - **GROUP BY DEPTNO:** Groups the results by department number to calculate the aggregates for each department.
 
-## Analysis of Results:
+#### *Analysis of Results*:
 
 - **Department Number:** The query successfully retrieves the department numbers and associates them with the corresponding salary data and employee count.
 - **Average Salary:** The `AVG(SAL)` function correctly calculates the average salary for each department, based on the employees assigned to that department. This helps in understanding the pay distribution within each department.
