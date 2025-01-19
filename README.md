@@ -1,4 +1,6 @@
-# MySQL Database Queries for COMPANY1
+# Assignment 1: Part 3 of 3
+
+## MySQL Database Queries for COMPANY1
 
 #### By Lauren Pechey
 
