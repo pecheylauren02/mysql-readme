@@ -110,55 +110,56 @@ Create and use the COMPANY1 database in MySQL:
 - The `CREATE DATABASE` command initializes the `COMPANY1` database for further use.
 - The `USE` command ensures all following operations are executed in the `COMPANY1` database context.
 
-### 2. Create the Tables and Inserting Sample Data 
+### 2. Create the Tables and Insert Sample Data:
+
 - Run the scripts below to create the EMP and DEPT tables in the database and insert the sample data:
 
--- Create DEPT table
-CREATE TABLE DEPT (
-    DEPTNO INT NOT NULL PRIMARY KEY,
-    DNAME VARCHAR(50),
-    LOC VARCHAR(50)
-);
+![Creating Tables](docs/images/create_table.png)
 
--- Insert data into DEPT table
-INSERT INTO DEPT (DEPTNO, DNAME, LOC)
-VALUES
-    (10, 'ACCOUNTING', 'NEW YORK'),
-    (20, 'RESEARCH', 'DALLAS'),
-    (30, 'SALES', 'CHICAGO');
+![Insert Tables](docs/images/insert_table.png)
 
--- Create EMP table
-CREATE TABLE EMP (
-    EMPNO INT NOT NULL PRIMARY KEY,
-    ENAME VARCHAR(50),
-    JOB VARCHAR(50),
-    MGR INT,
-    HIREDATE DATE,
-    SAL DECIMAL(10, 2),
-    COMM DECIMAL(10, 2),
-    DEPTNO INT,
-    FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
-);
+Results:
 
--- Insert data into EMP table
-INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
-VALUES
-    (7369, 'SMITH', 'CLERK', 7902, '1980-12-17', 800, NULL, 20),
-    (7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600, 300, 30),
-    (7521, 'WARD', 'SALESMAN', 7698, '1981-02-22', 1250, 500, 30),
-    (7566, 'JONES', 'MANAGER', 7839, '1981-04-02', 2975, NULL, 20),
-    (7654, 'MARTIN', 'SALESMAN', 7698, '1981-09-28', 1250, 1400, 30),
-    (7698, 'BLAKE', 'MANAGER', 7839, '1981-05-01', 2850, NULL, 30),
-    (7782, 'CLARK', 'MANAGER', 7839, '1981-06-09', 2450, NULL, 10),
-    (7788, 'SCOTT', 'ANALYST', 7566, '1987-04-19', 3000, NULL, 20),
-    (7839, 'KING', 'PRESIDENT', NULL, '1981-11-17', 5000, NULL, 10),
-    (7844, 'TURNER', 'SALESMAN', 7698, '1981-09-08', 1500, 0, 30),
-    (7876, 'ADAMS', 'CLERK', 7788, '1987-05-23', 1100, NULL, 20),
-    (7900, 'JAMES', 'CLERK', 7698, '1981-12-03', 950, NULL, 30),
-    (7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 3000, NULL, 20),
-    (7934, 'MILLER', 'CLERK', 7782, '1982-01-23', 1300, NULL, 10);
+![Creating and Inserting tables](docs/images/create_and_insert_tables.png)
 
-![Creating a Database](docs/images/create and insert tables.png)
+#### *Explanation:*
+
+The `DEPT` table holds department information, with `DEPTNO` as a unique identifier, and `DNAME` and `LOC` representing the department name and location. The `EMP` table stores employee details, with `EMPNO` as a unique identifier, and includes columns for job title, salary, commission, and `DEPTNO` linking employees to departments. The `MGR` column in the `EMP` table creates a self-referencing foreign key to model employee-manager relationships.
+
+Data is inserted into both tables: three departments (ACCOUNTING, RESEARCH, and SALES) and fourteen employees with varying roles (Clerk, Salesman, Manager, Analyst), each assigned to a department and manager.
+
+#### *Analysis of Results:*
+
+The database structure models a simple organizational hierarchy with departments and employees. The use of primary and foreign keys ensures data integrity, preventing invalid department and manager associations. The foreign key relationships link employees to departments and establish the manager-employee hierarchy within the `EMP` table. This design supports efficient querying of employee details, department affiliations, and manager relationships, making it suitable for organizational analysis and reporting.
+
+### 3. Verify Tables:
+
+![Verify Tables](docs/images/verify_tables.png)
+
+#### *Explanations:*
+
+The `SELECT * FROM DEPT` and `SELECT * FROM EMP` queries retrieve all the data stored in the `DEPT` and `EMP` tables, respectively. The `DEPT` table contains details about departments, while the `EMP` table holds employee information. These queries return all rows and columns, providing a comprehensive view of the data in each table.
+
+#### *Analysis of Results:*
+
+Running these queries will display all records from both tables. For the `DEPT` table, the output will list the department numbers, names, and locations. For the `EMP` table, the result will include employee numbers, names, job titles, managers, hire dates, salaries, commissions, and department affiliations. This allows for easy verification of the data inserted and ensures that the table structures and relationships are set up correctly.
+
+### 4. Show Create Table:
+
+![Show Create Tables](docs/images/show_tables.png)
+
+#### *Explanations:*
+
+The `SHOW CREATE TABLE EMP` and `SHOW CREATE TABLE DEPT` commands display the SQL statements that were used to create the `EMP` and `DEPT` tables. These commands provide the exact table structures, including column definitions, data types, and any constraints (such as primary keys and foreign keys) that were applied when the tables were created.
+
+#### *Analysis of Results:*
+
+These commands return the SQL code used to define the tables, including:
+- The column names and their respective data types.
+- Constraints like primary keys (`PRIMARY KEY`) and foreign keys (`FOREIGN KEY`).
+- Any references between tables (e.g., the foreign key between `EMP` and `DEPT`).
+
+This helps verify that the tables were created as intended, with the correct relationships and constraints in place. It also provides insight into the database schema for further modifications or troubleshooting.
 
 ## Queries
 Below are the SQL queries that retrieve specific information from the database:
