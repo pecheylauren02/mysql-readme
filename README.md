@@ -147,6 +147,9 @@ Running these queries will display all records from both tables. For the `DEPT` 
 
 ### 4. Show Create Table:
 
+- SHOW CREATE TABLE EMP;
+- SHOW CREATE TABLE DEPT;
+
 ![Show Create Tables](docs/images/show_tables.png)
 
 #### *Explanations:*
@@ -162,7 +165,8 @@ These commands return the SQL code used to define the tables, including:
 
 This helps verify that the tables were created as intended, with the correct relationships and constraints in place. It also provides insight into the database schema for further modifications or troubleshooting.
 
-## Queries
+## Queries:
+
 Below are the SQL queries that retrieve specific information from the database:
 
 ### 1. List all Employees whose salary is greater than 1,000 but not 2,000
@@ -190,9 +194,9 @@ This query retrieves the names (`ENAME`), department names (`DNAME`), and salari
 
 ### 2. Count the number of people in department 30 who receive both a salary and a commission:
 
-SELECT COUNT(*)
-FROM EMP
-WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
+- SELECT COUNT(*)
+- FROM EMP
+- WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
 
 ![Count Salaries Screenshot](docs/images/salary_count.png)
 
@@ -254,9 +258,9 @@ The query returned no results because every department in the DEPT table has at 
 
 ### 5. List the department number, average salary, and number/count of employees of each department:
 
-SELECT DEPTNO, AVG(SAL) AS AverageSalary, COUNT(*) AS NumberOfEmployees
-FROM EMP
-GROUP BY DEPTNO;
+- SELECT DEPTNO, AVG(SAL) AS AverageSalary, COUNT(*) AS NumberOfEmployees
+- FROM EMP
+- GROUP BY DEPTNO;
 
 ![Average Salary Screenshot](docs/images/average_salary.png)
 
@@ -276,4 +280,22 @@ The query is structured as follows:
 - **Department Number:** The query successfully retrieves the department numbers and associates them with the corresponding salary data and employee count.
 - **Average Salary:** The `AVG(SAL)` function correctly calculates the average salary for each department, based on the employees assigned to that department. This helps in understanding the pay distribution within each department.
 - **Employee Count:** The `COUNT(*)` function returns the number of employees in each department. This provides insight into the size of each department and the distribution of the workforce.
+
+## Conclusion
+
+This repository presents a series of SQL queries designed for interaction with the "COMPANY1" database, with an emphasis on the management of employees and departments. The queries explore fundamental SQL concepts, including JOIN operations, data filtering, aggregation, and advanced data analysis techniques.
+
+The queries offer valuable insights into organizational structure, compensation practices, and departmental operations, effectively demonstrating critical SQL competencies applicable to real-world database management and reporting tasks. This project provides a foundational resource for individuals seeking to advance their expertise in SQL within business contexts.
+
+## References:
+
+The following sources have been used for the understanding, development and production of this MySQL project:
+
+- Brookshear, J. & Brylow, D. (2019) *Computer Science - An Overview*. 13th ed. Harlow: Pearson.
+- DuBois, P. (2019) *MySQL Developer's Library*. 5th ed. Sebastopol, CA, USA: O'Reilly Media. 
+- Hoffman, J. (1996) *Introduction to Structured Query Language*. 1st Ed. Upper Saddle River, NJ, USA: Prentice Hall.
+- MySQL. (2023) MySQL Workbench. Available at: https://www.mysql.com/products/workbench/ (Accessed: 19 January 2025).
+- Nichter, D. (2022) *Efficient MySQL Performance*. 1st ed. Sebastopol, CA, USA: O'Reilly Media.
+- W3Schools (n.d.) SQL Tutorial. Available at: https://www.w3schools.com/sql/ (Accessed: 19 January 2025).
+
 
