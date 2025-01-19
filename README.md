@@ -54,29 +54,50 @@ Create and use the COMPANY1 database in MySQL:
 ## Queries
 Below are the SQL queries that retrieve specific information from the database:
 
-1. List all Employees whose salary is greater than 1,000 but not 2,000
+### 1. List all Employees whose salary is greater than 1,000 but not 2,000
 
 - SELECT ENAME, DNAME, SAL
 - FROM EMP E
 - JOIN DEPT D ON E.DEPTNO = D.DEPTNO
 - WHERE SAL > 1000 AND SAL < 2000;
 
-2. Count the number of people in department 30 who receive both a salary and a commission:
+### 2. Count the number of people in department 30 who receive both a salary and a commission:
 
 - SELECT COUNT(*)
 - FROM EMP
 - WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
 
-3. Find the name and salary of employees that have a salary greater or equal to 1,000 and live in Dallas:
+### 3. Find the name and salary of employees that have a salary greater or equal to 1,000 and live in Dallas:
 - SELECT ENAME, SAL
 - FROM EMP E
 - JOIN DEPT D ON E.DEPTNO = D.DEPTNO
 - WHERE SAL >= 1000 AND D.LOC = 'DALLAS';
 
-4. Find all departments that do not have any current employees:
+![Dallas Salaries Screenshot](docs/images/dallas_salaries.png)
+
+#### Explanation:
+The purpose of this query was to retrieve the names (`ENAME`) and salaries (`SAL`) of employees whose salary is greater than or equal to 1,000 and who work in the department located in Dallas. The query joins the `EMP` and `DEPT` tables on the department number (`DEPTNO`) and applies the following filtering conditions:
+
+- **The salary condition:** `SAL >= 1000`
+- **The location condition:** `D.LOC = 'DALLAS'`
+
+#### Analysis of Results:
+
+- **Employee Names and Salaries:** The query successfully retrieves the names and salaries of employees based on the specified salary and location criteria.
+- **Department Location:** The query ensures that only employees working in departments located in Dallas are included in the results, by filtering for `D.LOC = 'DALLAS'`.
+- **Salary Range:** Only employees whose salary is greater than or equal to 1,000 are included, filtering out those with lower salaries.
+
+
+### 4. Find all departments that do not have any current employees:
 - SELECT DNAME
 - FROM DEPT
 - WHERE DEPTNO NOT IN (SELECT DISTINCT DEPTNO FROM EMP);
+
+![Companies without current employees Screenshot](docs/images/unemployed_results.png)
+
+Explanation: The query was intended to retrieve the names of departments that currently have no employees. It works by selecting all department names from the DEPT table where the department number (DEPTNO) does not appear in the list of department numbers from the EMP table.
+
+However, the query returned no results because every department in the DEPT table has at least one employee in the EMP table. In other words, all department numbers in the DEPT table were present in the EMP table, so the NOT IN condition did not find any matching rows.
 
 5. List the department number, average salary, and number/count of employees of each department:
 - SELECT DEPTNO, AVG(SAL) AS Average_Salary, COUNT(*) AS Employee_Count
