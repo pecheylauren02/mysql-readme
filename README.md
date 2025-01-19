@@ -5,7 +5,7 @@ This repository contains SQL scripts and queries for managing and interacting wi
 
 ## Project Overview
 
-## Project Goals
+### Project Goals
 
 This repository aims to demonstrate practical SQL skills by implementing various queries to interact with the "COMPANY1" database. Through this project, the following goals are achieved:
 - Understanding and applying SQL JOINs and filtering conditions.
@@ -44,20 +44,121 @@ The queries provided in this repository are designed to retrieve and manipulate 
 | DNAME    | Department name                                               |
 | LOC      | Location of the department                                     |
 
-## Setup Instructions
+## MySQL Installation and Setup Instructions
 
-### 1. Clone the repository to your local machine:
-- git clone https://github.com/yourusername/company1-database.git
+### 1. Install MySQL or MySQL Workbench
 
-### 2. Create the Database
+- Download and install MySQL or MySQL Workbench from the official website:  
+  [MySQL Workbench Download](https://dev.mysql.com/downloads/workbench/)
+
+### 2. Install MySQL Server (if not already installed)
+
+- Download and install MySQL Community Server from the official website:  
+  [MySQL Community Server Download](https://dev.mysql.com/downloads/installer/)
+  
+  - Choose the version based on your operating system.
+  - Follow the on-screen instructions to complete the installation.
+
+### 3. Configure MySQL Server
+
+- After installation, launch MySQL Workbench and configure the server by:
+  - Setting up a root password when prompted.
+  - Choosing the "Development Computer" setup type for a local development environment.
+  
+### 4. Open MySQL Workbench
+
+- Launch MySQL Workbench.
+- Click on the **+** sign next to **MySQL Connections** to set up a new connection.
+  
+### 5. Set Up a New Connection
+
+- In the **Set up a New Connection** window:
+  - **Connection Name:** Enter a custom name for the connection.
+  - **Connection Method:** Choose **Standard (TCP/IP)**.
+  - **Hostname:** Enter `localhost` (or the IP address of the server if remote).
+  - **Port:** Use `3306` (default MySQL port).
+  - **Username:** Enter `root` (or your MySQL user).
+  - **Password:** Enter the root password you set earlier.
+
+- Click **Test Connection** to ensure everything is set up correctly.
+
+### 6. Start Using MySQL Workbench
+
+- Once the connection is successful, click **OK** to save the connection.
+- Double-click on your saved connection to start using MySQL Workbench.
+- You can now execute SQL queries, manage databases, and perform various database operations.
+
+## MySQL Initial Database Setup:
+
+### 1. Create the Database
 Create and use the COMPANY1 database in MySQL:
 - CREATE DATABASE COMPANY1;
 - USE DATABASE COMPANY1;
 
-### 3. Create the Tables
-- Run the script to create the EMP and DEPT tables in the database
+![Creating a Database](docs/images/create_database.png)
 
-### 4. Insert Sample Data
+#### *Explanation:*
+
+- **`CREATE DATABASE COMPANY1;`**  
+  Creates a new database called `COMPANY1` in MySQL.
+
+- **`USE DATABASE COMPANY1;`**  
+  Selects the `COMPANY1` database as the active database for subsequent queries.
+
+#### *Analysis of Results:*
+
+- The `CREATE DATABASE` command initializes the `COMPANY1` database for further use.
+- The `USE` command ensures all following operations are executed in the `COMPANY1` database context.
+
+### 2. Create the Tables and Inserting Sample Data 
+- Run the scripts below to create the EMP and DEPT tables in the database and insert the sample data:
+
+-- Create DEPT table
+CREATE TABLE DEPT (
+    DEPTNO INT NOT NULL PRIMARY KEY,
+    DNAME VARCHAR(50),
+    LOC VARCHAR(50)
+);
+
+-- Insert data into DEPT table
+INSERT INTO DEPT (DEPTNO, DNAME, LOC)
+VALUES
+    (10, 'ACCOUNTING', 'NEW YORK'),
+    (20, 'RESEARCH', 'DALLAS'),
+    (30, 'SALES', 'CHICAGO');
+
+-- Create EMP table
+CREATE TABLE EMP (
+    EMPNO INT NOT NULL PRIMARY KEY,
+    ENAME VARCHAR(50),
+    JOB VARCHAR(50),
+    MGR INT,
+    HIREDATE DATE,
+    SAL DECIMAL(10, 2),
+    COMM DECIMAL(10, 2),
+    DEPTNO INT,
+    FOREIGN KEY (DEPTNO) REFERENCES DEPT(DEPTNO)
+);
+
+-- Insert data into EMP table
+INSERT INTO EMP (EMPNO, ENAME, JOB, MGR, HIREDATE, SAL, COMM, DEPTNO)
+VALUES
+    (7369, 'SMITH', 'CLERK', 7902, '1980-12-17', 800, NULL, 20),
+    (7499, 'ALLEN', 'SALESMAN', 7698, '1981-02-20', 1600, 300, 30),
+    (7521, 'WARD', 'SALESMAN', 7698, '1981-02-22', 1250, 500, 30),
+    (7566, 'JONES', 'MANAGER', 7839, '1981-04-02', 2975, NULL, 20),
+    (7654, 'MARTIN', 'SALESMAN', 7698, '1981-09-28', 1250, 1400, 30),
+    (7698, 'BLAKE', 'MANAGER', 7839, '1981-05-01', 2850, NULL, 30),
+    (7782, 'CLARK', 'MANAGER', 7839, '1981-06-09', 2450, NULL, 10),
+    (7788, 'SCOTT', 'ANALYST', 7566, '1987-04-19', 3000, NULL, 20),
+    (7839, 'KING', 'PRESIDENT', NULL, '1981-11-17', 5000, NULL, 10),
+    (7844, 'TURNER', 'SALESMAN', 7698, '1981-09-08', 1500, 0, 30),
+    (7876, 'ADAMS', 'CLERK', 7788, '1987-05-23', 1100, NULL, 20),
+    (7900, 'JAMES', 'CLERK', 7698, '1981-12-03', 950, NULL, 30),
+    (7902, 'FORD', 'ANALYST', 7566, '1981-12-03', 3000, NULL, 20),
+    (7934, 'MILLER', 'CLERK', 7782, '1982-01-23', 1300, NULL, 10);
+
+![Creating a Database](docs/images/create and insert tables.png)
 
 ## Queries
 Below are the SQL queries that retrieve specific information from the database:
