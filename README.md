@@ -1,4 +1,5 @@
 # MySQL Database Queries for COMPANY1
+
 #### By Lauren Pechey
 
 This repository contains SQL scripts and queries for managing and interacting with the "COMPANY1" database. The dataset includes tables related to employees and departments within the company. This forms part of Assignment 1: Part 3 of 3 of the Launching Into Computer Science module with the University of Essex Online.
