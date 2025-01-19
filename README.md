@@ -83,5 +83,5 @@ Below are the SQL queries that retrieve specific information from the database:
 - FROM EMP
 - GROUP BY DEPTNO;
 
-
+![Average Salary Screenshot](docs/images/average_salary.png)
 
