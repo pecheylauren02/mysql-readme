@@ -1,10 +1,18 @@
-# Assignment 1: Part 3 of 3 documentation
+# MySQL Database Queries for COMPANY1
+#### By Lauren Pechey
 
-## MySQL Database Queries for COMPANY1
+This repository contains SQL scripts and queries for managing and interacting with the "COMPANY1" database. The dataset includes tables related to employees and departments within the company. This forms part of Assignment 1: Part 3 of 3 of the Launching Into Computer Science module with the University of Essex Online.
 
-This repository contains SQL scripts and queries for managing and interacting with the "COMPANY1" database. The dataset includes tables related to employees and departments within the company.
+## Project Overview
 
-### Project Overview
+## Project Goals
+
+This repository aims to demonstrate practical SQL skills by implementing various queries to interact with the "COMPANY1" database. Through this project, the following goals are achieved:
+- Understanding and applying SQL JOINs and filtering conditions.
+- Performing aggregation and data analysis tasks using SQL.
+- Gaining experience in managing and querying relational databases.
+
+### Summary of Project
 
 The **COMPANY1** database consists of two main tables:
 
@@ -13,9 +21,9 @@ The **COMPANY1** database consists of two main tables:
 
 The queries provided in this repository are designed to retrieve and manipulate data for various use cases, such as employee salary analysis, department statistics, and more.
 
-### Table Structures
+## Table Structures
 
-#### EMP Table
+### EMP Table
 
 | Column   | Description                                                   |
 |----------|---------------------------------------------------------------|
@@ -28,7 +36,7 @@ The queries provided in this repository are designed to retrieve and manipulate 
 | COMM     | Commission received by the employee (if applicable)            |
 | DEPTNO   | Department number (foreign key to DEPT)                        |
 
-#### DEPT Table
+### DEPT Table
 
 | Column   | Description                                                   |
 |----------|---------------------------------------------------------------|
@@ -38,18 +46,18 @@ The queries provided in this repository are designed to retrieve and manipulate 
 
 ## Setup Instructions
 
-1. Clone the repository to your local machine:
+### 1. Clone the repository to your local machine:
 - git clone https://github.com/yourusername/company1-database.git
 
-2. Create the Database
+### 2. Create the Database
 Create and use the COMPANY1 database in MySQL:
 - CREATE DATABASE COMPANY1;
 - USE DATABASE COMPANY1;
 
-3. Create the Tables
+### 3. Create the Tables
 - Run the script to create the EMP and DEPT tables in the database
 
-4. Insert Sample Data
+### 4. Insert Sample Data
 
 ## Queries
 Below are the SQL queries that retrieve specific information from the database:
@@ -86,6 +94,7 @@ WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
 ![Count Salaries Screenshot](docs/images/salary_count.png)
 
 #### *Explanation:*
+
 This query counts the number of employees in department 30 who have both a non-null salary (`SAL IS NOT NULL`) and a non-null commission (`COMM IS NOT NULL`). The query applies the following conditions:
 
 - **DEPTNO = 30:** Filters the employees who are assigned to department 30.
@@ -102,6 +111,7 @@ The query uses `COUNT(*)` to return the total number of employees who meet all t
 - **Result Count:** The final result gives the total number of employees in department 30 who meet all the specified conditions, which helps in understanding the distribution of compensation types within the department.
 
 ### 3. Find the name and salary of employees that have a salary greater or equal to 1,000 and live in Dallas:
+
 - SELECT ENAME, SAL
 - FROM EMP E
 - JOIN DEPT D ON E.DEPTNO = D.DEPTNO
@@ -110,6 +120,7 @@ The query uses `COUNT(*)` to return the total number of employees who meet all t
 ![Dallas Salaries Screenshot](docs/images/dallas_salaries.png)
 
 #### *Explanation*:
+
 The purpose of this query is to retrieve the names (`ENAME`) and salaries (`SAL`) of employees whose salary is greater than or equal to 1,000 and who work in the department located in Dallas. The query joins the `EMP` and `DEPT` tables on the department number (`DEPTNO`) and applies the following filtering conditions:
 
 - **The salary condition:** `SAL >= 1000`
@@ -123,6 +134,7 @@ The purpose of this query is to retrieve the names (`ENAME`) and salaries (`SAL`
 
 
 ### 4. Find all departments that do not have any current employees:
+
 - SELECT DNAME
 - FROM DEPT
 - WHERE DEPTNO NOT IN (SELECT DISTINCT DEPTNO FROM EMP);
@@ -146,6 +158,7 @@ GROUP BY DEPTNO;
 ![Average Salary Screenshot](docs/images/average_salary.png)
 
 #### *Explanation:*
+
 This query retrieves the department number (`DEPTNO`), the average salary (`AVG(SAL)`) for employees in each department, and the total number of employees (`COUNT(*)`) in each department. The query uses the `GROUP BY` clause to group the data by department number (`DEPTNO`), calculating the aggregate functions `AVG()` for the average salary and `COUNT()` for the number of employees per department.
 
 The query is structured as follows:
