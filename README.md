@@ -67,5 +67,21 @@ Below are the SQL queries that retrieve specific information from the database:
 - FROM EMP
 - WHERE DEPTNO = 30 AND SAL IS NOT NULL AND COMM IS NOT NULL;
 
+3. Find the name and salary of employees that have a salary greater or equal to 1,000 and live in Dallas:
+- SELECT ENAME, SAL
+- FROM EMP E
+- JOIN DEPT D ON E.DEPTNO = D.DEPTNO
+- WHERE SAL >= 1000 AND D.LOC = 'DALLAS';
+
+4. Find all departments that do not have any current employees:
+- SELECT DNAME
+- FROM DEPT
+- WHERE DEPTNO NOT IN (SELECT DISTINCT DEPTNO FROM EMP);
+
+5. List the department number, average salary, and number/count of employees of each department:
+- SELECT DEPTNO, AVG(SAL) AS Average_Salary, COUNT(*) AS Employee_Count
+- FROM EMP
+- GROUP BY DEPTNO;
+
 
 
